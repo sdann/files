@@ -1,0 +1,24 @@
+# Enable scripts to proxy through Burp Suite
+#
+# Tested to work with:
+# * Python
+#   - requests
+# * Node JS
+#   - axios
+#
+# Usage: source .sh_proxy
+
+PROXY_IP="127.0.0.1"
+PROXY_PORT="8080"
+
+export http_proxy="http://$PROXY_IP:$PROXY_PORT"
+export HTTP_PROXY=$http_proxy
+export https_proxy="https://$PROXY_IP:$PROXY_PORT"
+export HTTPS_PROXY=$http_proxy
+
+# Ignore Burp local CA
+export PYTHONWARNINGS="ignore:Unverified HTTPS request"
+export NODE_TLS_REJECT_UNAUTHORIZED="0"
+
+# Change prompt, so we know what terminals are proxied
+PROMPT="%F{green}%m%F{yellow}($(arch)%F{yellow})[%f%~%F{yellow}]%f %F{cyan}%D{%+}%f %F{red}PROXY%f"$'\n'"%# "
