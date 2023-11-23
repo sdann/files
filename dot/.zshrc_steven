@@ -1,0 +1,55 @@
+# MacOS specific
+
+## Command Aliases
+alias ls='ls -FG'
+
+# GNU grep
+alias grep='grep -snrI --color=auto --exclude-dir=\.git --exclude-dir node_modules --exclude-dir dist'
+# Timestamp
+alias ts='date +"%Y-%m-%dT%H:%M:%S"'
+# Remove color control chars
+alias rmcolor='sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g"'
+# Flush DNS cache on MacOS
+alias flushdns='sudo killall -HUP mDNSResponder; sleep 2;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache'
+# Listening service
+alias listening='lsof -P -iTCP -sTCP:LISTEN'
+
+# Git Aliases
+alias gst='git status'
+alias gri='git rebase -i origin/master'
+alias gra='git rebase --abort'
+alias grc='git rebase --continue'
+alias gcp='git cherry-pick'
+alias gl='git log --oneline --decorate'
+alias glp='git log -p'
+alias gf='git fetch'
+alias gb='git branch'
+alias ga='git add'
+alias gc='git commit'
+alias gca='git commit --amend'
+alias gd='git diff --color-words'
+alias gl='git log --oneline --decorate'
+alias gcam='git commit -am'
+alias gck='git checkout'
+alias grom='git rebase origin/master'
+alias gpuo='git push -u origin $(git branch --show-current)'
+
+# Set a fancy prompt 
+PROMPT="%F{green}%m%F{yellow}($(arch)%F{yellow})[%f%~%F{yellow}]%f %F{cyan}%D{%+}%f"$'\n'"%# "
+
+## Shell Options
+# Pickup hidden files when using *, e.g. "grep foo *"
+setopt GLOB_DOTS
+unsetopt share_history
+
+### Aliases w/ Parmeters (Functions)
+
+function mkcd { command mkdir $1 && cd $1; }
+
+### Exports
+
+export LSCOLORS=gxfxcxdxbxegedabagacad
+# Include local ~/bin dir in path
+export PATH=$PATH:$HOME/bin
+# User specific environment
+export EDITOR=vim
